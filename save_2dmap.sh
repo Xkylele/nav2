@@ -1,6 +1,6 @@
 
-cmds=(  "ros2 run nav2_map_server map_saver_cli -t /projected_map -f /home/hsh/workspase/hsh_ws/hsh_ros2_humble_main/map")
-
+cmds=(  "python3 ./src/navigation/robot_navigation2/map_trans_tool/pcd2pgm_simplify.py ")
+# ros2 run nav2_map_server map_saver_cli -f test
 
 for cmd in "${cmds[@]}"
 do

@@ -14,6 +14,8 @@ def generate_launch_description():
     nav2_param_path = launch.substitutions.LaunchConfiguration(
         'params_file',
         default=os.path.join(fishbot_navigation2_dir, 'config', 'nav2_params.yaml'))
+    map_yaml_path = launch.substitutions.LaunchConfiguration(
+        'map', default=os.path.join(fishbot_navigation2_dir, 'maps', 'test.yaml'))
 
     return launch.LaunchDescription([
         launch.actions.DeclareLaunchArgument(
@@ -26,6 +28,11 @@ def generate_launch_description():
             default_value=nav2_param_path,
             description='Full path to param file to load'
         ),
+        launch.actions.DeclareLaunchArgument(
+            'map',
+            default_value=map_yaml_path,
+            description='Full path to map file to load'
+        ),
 
 
         launch.actions.IncludeLaunchDescription(
@@ -33,9 +40,9 @@ def generate_launch_description():
                 [nav2_bringup_dir, '/launch', '/bringup_launch.py']),
             launch_arguments={
                 'use_sim_time': use_sim_time,
-                'params_file': nav2_param_path,
-                'map': '',                  
-                'use_map_topic': 'true'     
+                'params_file': nav2_param_path,                  
+                # 'use_map_topic': 'true',
+                'map': map_yaml_path
             }.items(),
         ),
 
