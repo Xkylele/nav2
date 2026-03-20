@@ -1,6 +1,7 @@
 import os
 import launch
 import launch_ros
+from launch_ros.actions import Node
 from ament_index_python.packages import get_package_share_directory
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 
@@ -15,7 +16,7 @@ def generate_launch_description():
         'params_file',
         default=os.path.join(fishbot_navigation2_dir, 'config', 'nav2_params.yaml'))
     map_yaml_path = launch.substitutions.LaunchConfiguration(
-        'map', default=os.path.join(fishbot_navigation2_dir, 'maps', 'test.yaml'))
+        'map', default=os.path.join(fishbot_navigation2_dir, 'maps', 'map.yaml'))
 
     return launch.LaunchDescription([
         launch.actions.DeclareLaunchArgument(
@@ -37,14 +38,30 @@ def generate_launch_description():
 
         launch.actions.IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
-                [nav2_bringup_dir, '/launch', '/bringup_launch.py']),
+                [nav2_bringup_dir, '/launch', '/navigation_launch.py']),
             launch_arguments={
                 'use_sim_time': use_sim_time,
                 'params_file': nav2_param_path,                  
                 # 'use_map_topic': 'true',
-                'map': map_yaml_path
+                # 'map': map_yaml_path
             }.items(),
         ),
+
+        Node(
+                package="map_trans_pkg",
+                executable="map_publisher_node",
+                name="map_for_nav2",
+                output="screen",
+                parameters=[
+                    {
+                        "map_path": map_yaml_path,      # Same YAML used by Nav2
+                        "publish_topic": "/map",
+                        "frame_id": "map",
+                        "publish_interval": 10.0,
+                    }
+                ],
+            ),
+
 
         launch_ros.actions.Node(
             package='rviz2',

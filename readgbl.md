@@ -27,3 +27,13 @@ version 1.0 ---- 看能否使用icp来对齐
 ---version 2.0
 遗留bug
 problem：local cost map 一直有问题
+
+3.19 修改pointcloud2scan后 局部地图正常
+
+
+需要修改的配置
+nav2param.yaml
+registration/icp/config
+autopatrol/config
+
+改完mapyaml 要build

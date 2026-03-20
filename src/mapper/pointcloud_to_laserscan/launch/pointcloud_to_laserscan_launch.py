@@ -15,26 +15,33 @@ def generate_launch_description():
             executable='static_transform_publisher',
             name='static_transform_publisher',
             arguments=[
-                '--x', '0', '--y', '0', '--z', '0',
-                '--qx', '0', '--qy', '0', '--qz', '0', '-pointcloud_to_laserscan-qw', '1',
-                '--frame-id', 'base_link', '--child-frame-id' , 'livox_frame'
+                '--x', '0',
+                '--y', '0',
+                '--z', '0',
+                '--qx', '0',
+                '--qy', '0',
+                '--qz', '0',
+                '--qw', '1',
+                '--frame-id', 'base_link',
+                '--child-frame-id', 'livox_frame'
             ]
         ),
         Node(
             package='pointcloud_to_laserscan', executable='pointcloud_to_laserscan_node',
             remappings=[
-                ('cloud_in', '/cloud_registered_body'),   # 直接订阅真实点云
+                ('cloud_in', '/cloud_registered'),   # 直接订阅真实点云
                 ('scan', '/scan')  # 输出 /scanner/scan
             ],
             parameters=[{
                 'target_frame': 'livox_frame',  # 坐标系要与 TF 匹配
                 'transform_tolerance': 0.01,
+                'queue_size': 100,
                 'min_height': -1.0,  # 可根据实际调整
                 'max_height': 1.0,
                 'angle_min': -3.14159,
                 'angle_max': 3.14159,
-                'angle_increment': 0.0043,
-                'scan_time': 0.3333,
+                'angle_increment': 0.01,
+                'scan_time': 0.1,
                 'range_min': 0.45,
                 'range_max': 10.0,
                 'use_inf': True,
