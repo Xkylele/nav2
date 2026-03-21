@@ -7,9 +7,11 @@ navigation2的lauch文件中 去掉'use_map_topic': 'true'
 不要使用topic话题来发布/map
 使用静态地图 launch参数'map'： xxx.yaml
 
-patchelf   --set-rpath "/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/opt/ros/humble/lib"   --force-rpath   /home/lele/ros2_humble_main/install/fast_lio/lib/fast_lio/fastlio_mapping
+patchelf   --set-rpath "/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/opt/ros/humble/lib"   --force-rpath   /home/lele/Desktop/nav2/install/fast_lio/lib/fast_lio/fastlio_mapping
 
-patchelf   --set-rpath "/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/opt/ros/humble/lib"   --force-rpath   /home/lele/ros2_humble_main/install/icp_registration/lib/icp_registration/icp_registration_node
+patchelf   --set-rpath "/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/opt/ros/humble/lib"   --force-rpath   /home/lele/Desktop/nav2/install/icp_registration/lib/icp_registration/icp_registration_node
+
+patchelf   --set-rpath "/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/opt/ros/humble/lib"   --force-rpath   /home/lele/Desktop/nav2/install/terrain_analysis_ext/lib/terrain_analysis_ext/pathNorm
 
 problem：local cost map 一直有问题 point_to_scan没办法直接用 /livox/lidar
 最后将point_to_scan中的remapping 改为订阅 fastlio2 发布的/cloud_registered_body

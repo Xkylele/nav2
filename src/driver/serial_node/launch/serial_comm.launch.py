@@ -9,7 +9,7 @@ def generate_launch_description():
             name='serial_twist_publisher',
             parameters=[
                 {'port': '/dev/usb_serial_0'},
-                {'baudrate': 921600},
+                {'baudrate': 115200},
                 {'linear_scale': 1000.0},     
                 {'angular_scale': 1000.0},   
             ],

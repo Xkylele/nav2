@@ -68,66 +68,7 @@ install(DIRECTORY
   DESTINATION share/${PROJECT_NAME}/
 )
 
-# pointcloud2_to_laserscan
-add_executable(pointcloud2_to_laserscan src/pointcloud2_to_laserscan.cpp)
-ament_target_dependencies(pointcloud2_to_laserscan
-  rclcpp
-  sensor_msgs
-  pcl_conversions
-  tf2_ros
-  tf2_sensor_msgs
-  tf2_geometry_msgs
-)
-target_link_libraries(pointcloud2_to_laserscan
-  ${PCL_LIBRARIES}
-  laser_geometry::laser_geometry
-)
-install(TARGETS pointcloud2_to_laserscan
-  DESTINATION lib/${PROJECT_NAME}
-)
 
-# pointcloud2laserscan_elv
-add_executable(pointcloud2laserscan_elv src/pointcloud2_to_laserscan_elv.cpp)
-ament_target_dependencies(pointcloud2laserscan_elv
-  rclcpp
-  sensor_msgs
-  nav_msgs
-  pcl_conversions
-  tf2_ros
-  tf2_sensor_msgs
-  tf2_geometry_msgs
-)
-target_link_libraries(pointcloud2laserscan_elv
-  ${PCL_LIBRARIES}
-  ${OpenCV_LIBS}
-)
-install(TARGETS pointcloud2laserscan_elv
-  DESTINATION lib/${PROJECT_NAME}
-)
-
-# relocalization_node
-add_executable(relocalization_node src/relocalization.cpp)
-ament_target_dependencies(relocalization_node
-  rclcpp
-  sensor_msgs
-  nav_msgs
-  pcl_conversions
-  tf2_ros
-  tf2_sensor_msgs
-  tf2_geometry_msgs
-)
-target_include_directories(relocalization_node PRIVATE
-  include
-  ${Open3D_INCLUDE_DIRS}
-)
-target_link_libraries(relocalization_node
-  ${PCL_LIBRARIES}
-  ${OpenCV_LIBS}
-  ${Open3D_LIBRARIES}
-)
-install(TARGETS relocalization_node
-  DESTINATION lib/${PROJECT_NAME}
-)
 
 # 安装Python可执行节点
 install(PROGRAMS

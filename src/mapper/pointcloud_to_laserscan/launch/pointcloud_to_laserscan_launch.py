@@ -15,8 +15,8 @@ def generate_launch_description():
             executable='static_transform_publisher',
             name='static_transform_publisher',
             arguments=[
-                '--x', '0',
-                '--y', '0',
+                '--x', '-0.195',
+                '--y', '-0.120',
                 '--z', '0',
                 '--qx', '0',
                 '--qy', '0',
@@ -33,16 +33,16 @@ def generate_launch_description():
                 ('scan', '/scan')  # 输出 /scanner/scan
             ],
             parameters=[{
-                'target_frame': 'livox_frame',  # 坐标系要与 TF 匹配
+                'target_frame': 'base_link',  # 坐标系要与 TF 匹配
                 'transform_tolerance': 0.01,
-                'queue_size': 100,
-                'min_height': -1.0,  # 可根据实际调整
-                'max_height': 1.0,
+                'queue_size': 50,
+                'min_height': -0.5,  # 可根据实际调整
+                'max_height': 6.0,
                 'angle_min': -3.14159,
                 'angle_max': 3.14159,
-                'angle_increment': 0.01,
-                'scan_time': 0.1,
-                'range_min': 0.45,
+                'angle_increment': 0.00872665,
+                'scan_time': 0.05,
+                'range_min': 0.25,
                 'range_max': 10.0,
                 'use_inf': True,
                 'inf_epsilon': 1.0

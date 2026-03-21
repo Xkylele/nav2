@@ -35,7 +35,6 @@ def generate_launch_description():
             description='Full path to map file to load'
         ),
 
-
         launch.actions.IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
                 [nav2_bringup_dir, '/launch', '/navigation_launch.py']),
@@ -61,7 +60,6 @@ def generate_launch_description():
                     }
                 ],
             ),
-
 
         launch_ros.actions.Node(
             package='rviz2',

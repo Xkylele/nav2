@@ -1,13 +1,13 @@
 
 cmds=(
-	
 	"ros2 launch livox_ros_driver2 msg_MID360_launch.py"
+	# "ros2 run livox_to_pcl livox_to_pointcloud2"
 	"ros2 launch fast_lio mapping.launch.py"
 	"ros2 launch serial_node serial_comm.launch.py "
-	"ros2 launch pointcloud_to_laserscan pointcloud_to_laserscan_launch.py"
+	# "ros2 launch pointcloud_to_laserscan pointcloud_to_laserscan_launch.py"
 	"ros2 launch autopatrol_robot start_patrol.launch.py"
 	"ros2 launch icp_registration icp.launch.py"
-	"ros2 launch robot_navigation2 navigation2.launch.py"
+	"ros2 launch robot_navigation2 navigation2_1.launch.py"
 	 )
 
 #"ros2 launch amcl_registration amcl.launch.py"
