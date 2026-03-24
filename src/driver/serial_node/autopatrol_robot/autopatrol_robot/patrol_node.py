@@ -37,14 +37,15 @@ class PatrolNode(BasicNavigator):
             self.get_logger().info(f"收到标志位：{msg.data}")
             self.buff_point_ = self.get_parameter('buff_point').value
             self.destination_ = self.get_pose_by_xyyaw(self.buff_point_[0], self.buff_point_[1], self.buff_point_[2])
-            self.nav_to_pose(self.destination_)
+            self.cancelTask()  # 取消当前任务，让主循环用新目标重新规划
             
         elif msg.data == "Go_home":
             self.last_state_ = "Go_home"
             self.get_logger().info(f"收到标志位：{msg.data}")
             self.home_point_ = self.get_parameter('home_point').value
             self.destination_ = self.get_pose_by_xyyaw(self.home_point_[0], self.home_point_[1], self.home_point_[2])
-            self.nav_to_pose(self.destination_)
+            self.cancelTask()  # 取消当前任务，让主循环用新目标重新规划
+
 
     def get_pose_by_xyyaw(self, x, y, yaw):
         """
